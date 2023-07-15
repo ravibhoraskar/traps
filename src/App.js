@@ -12,14 +12,18 @@ import "./App.css";
 
 function App() {
   const [innerHTML, setInnerHTML] = useState("<div><h1>Hello World</h1></div>");
-  const updateFrame = function () {
-    console.log("Updating");
-    alert("updating!");
+  const [prompt, updatePrompt] = useState("");
+  const submitPrompt = function () {
+    console.log("Updating base on prompt: " + prompt);
+    alert("Updating base on prompt: " + prompt);
+    setInnerHTML(prompt);
   };
 
   return (
     <div className="App">
-      <QuoteContext.Provider value={{ innerHTML, setInnerHTML, updateFrame }}>
+      <QuoteContext.Provider
+        value={{ innerHTML, setInnerHTML, prompt, updatePrompt, submitPrompt }}
+      >
         <SplitPane className="split-pane-row">
           <SplitPaneLeft>
             <SplitPane className="split-pane-col">
