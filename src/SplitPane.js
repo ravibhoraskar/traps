@@ -89,10 +89,8 @@ export const SplitPaneTop = (props) => {
       <div>
         <form>
           <div>
-            <input
-              type="text"
+            <textarea
               placeholder="What should I change?"
-              name="prompt"
               value={prompt}
               onChange={(event) => {
                 updatePrompt(event.target.value);

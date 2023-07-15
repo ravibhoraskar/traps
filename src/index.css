@@ -111,3 +111,8 @@ blockquote p {
 .quote span {
   font-weight: bold;
 }
+
+textarea {
+  width: 500px;
+  height: 100px;
+}
