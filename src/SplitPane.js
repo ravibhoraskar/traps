@@ -116,14 +116,12 @@ export const SplitPaneBottom = (props) => {
 
   return (
     <div {...props} className="split-pane-bottom">
-      <b>
-        Current HTML:
-        <br />
-      </b>{" "}
+      <b> Current HTML: </b>
+      <br />
       {getCurrHTML()}
       <br />
-      Current index: {HTMLindex} <br />
-      Logs length: {HTMLlogs.length}
+      <b>Current index:</b> {HTMLindex} <br />
+      <b>Logs length:</b> {HTMLlogs.length}
     </div>
   );
 };
