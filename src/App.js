@@ -13,11 +13,7 @@ import "./App.css";
 function App() {
   const [innerHTML, setInnerHTML] = useState("<div><h1>Hello World</h1></div>");
   const [prompt, updatePrompt] = useState("");
-  const submitPrompt = function () {
-    console.log("Updating base on prompt: " + prompt);
-    alert("Updating base on prompt: " + prompt);
-    setInnerHTML(prompt);
-  };
+  const submitPrompt = setInnerHTML.bind(this, prompt);
 
   return (
     <div className="App">
