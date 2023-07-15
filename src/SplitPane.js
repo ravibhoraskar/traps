@@ -87,15 +87,15 @@ export const SplitPaneTop = (props) => {
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
       <div>
-      <form onSubmit={updateFrame}>
-      <div>
-      <input type="text" placeholder="What should I change?"/>
+        <form onSubmit={updateFrame}>
+          <div>
+            <input type="text" placeholder="What should I change?" />
+          </div>
+          <div>
+            <input type="submit" value="Update HTML" />
+          </div>
+        </form>
       </div>
-      <div>
-      <input type="submit" value="Update HTML"/>
-      </div>
-      </form>
-    </div>
     </div>
   );
 };
@@ -105,7 +105,11 @@ export const SplitPaneBottom = (props) => {
 
   return (
     <div {...props} className="split-pane-bottom">
-      <b>Current HTML:<br/></b> {innerHTML}
+      <b>
+        Current HTML:
+        <br />
+      </b>{" "}
+      {innerHTML}
     </div>
   );
 };
@@ -129,11 +133,11 @@ export const SplitPaneLeft = (props) => {
 
 export const SplitPaneRight = (props) => {
   const { innerHTML } = useContext(QuoteContext);
-  console.log(innerHTML)
-  const markup={ __html: innerHTML};
+  console.log(innerHTML);
+  const markup = { __html: innerHTML };
   return (
     <div {...props} className="split-pane-right">
-      <div className="quote" dangerouslySetInnerHTML={markup}/>
+      <div className="quote" dangerouslySetInnerHTML={markup} />
     </div>
   );
 };

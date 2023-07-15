@@ -12,10 +12,10 @@ import "./App.css";
 
 function App() {
   const [innerHTML, setInnerHTML] = useState("<div><h1>Hello World</h1></div>");
-  const updateFrame = function() {
-    console.log('Updating');
-    alert('updating!');
-  }
+  const updateFrame = function () {
+    console.log("Updating");
+    alert("updating!");
+  };
 
   return (
     <div className="App">
