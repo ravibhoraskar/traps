@@ -72,7 +72,7 @@ export const Divider = (props) => {
 export const SplitPaneTop = (props) => {
   const topRef = createRef();
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const { quotes, setCurrQuote, updateFrame } = useContext(QuoteContext);
+  const { updateFrame } = useContext(QuoteContext);
 
   useEffect(() => {
     if (!clientHeight) {
@@ -87,11 +87,15 @@ export const SplitPaneTop = (props) => {
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
       <div>
+      <form onSubmit={updateFrame}>
+      <div>
       <input type="text" placeholder="What should I change?"/>
       </div>
       <div>
-      <input type="button" value="Update Frame" onClick={updateFrame}/>
+      <input type="submit" value="Update HTML"/>
       </div>
+      </form>
+    </div>
     </div>
   );
 };
