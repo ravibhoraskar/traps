@@ -45,7 +45,6 @@ const SplitPane = ({ children, ...props }) => {
       document.removeEventListener("mousemove", onMouseHoldMove);
     };
   });
-
   return (
     <div {...props}>
       <SplitPaneContext.Provider
@@ -72,7 +71,8 @@ export const Divider = (props) => {
 export const SplitPaneTop = (props) => {
   const topRef = createRef();
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const { prompt, updatePrompt, submitPrompt } = useContext(QuoteContext);
+  const { prompt, updatePrompt, submitPrompt, undoPrompt, redoPrompt } =
+    useContext(QuoteContext);
 
   useEffect(() => {
     if (!clientHeight) {
@@ -101,6 +101,9 @@ export const SplitPaneTop = (props) => {
           </div>
           <div>
             <input type="button" value="Update HTML" onClick={submitPrompt} />
+            <br />
+            <input type="button" value="Undo" onClick={undoPrompt} /> {}
+            <input type="button" value="Redo" onClick={redoPrompt} />
           </div>
         </form>
       </div>
@@ -109,7 +112,7 @@ export const SplitPaneTop = (props) => {
 };
 
 export const SplitPaneBottom = (props) => {
-  const { innerHTML } = useContext(QuoteContext);
+  const { HTMLlogs, HTMLindex, getCurrHTML } = useContext(QuoteContext);
 
   return (
     <div {...props} className="split-pane-bottom">
@@ -117,7 +120,10 @@ export const SplitPaneBottom = (props) => {
         Current HTML:
         <br />
       </b>{" "}
-      {innerHTML}
+      {getCurrHTML()}
+      <br />
+      Current index: {HTMLindex} <br />
+      Logs length: {HTMLlogs.length}
     </div>
   );
 };
@@ -140,9 +146,8 @@ export const SplitPaneLeft = (props) => {
 };
 
 export const SplitPaneRight = (props) => {
-  const { innerHTML } = useContext(QuoteContext);
-  console.log(innerHTML);
-  const markup = { __html: innerHTML };
+  const { getCurrHTML } = useContext(QuoteContext);
+  const markup = { __html: getCurrHTML() };
   return (
     <div {...props} className="split-pane-right">
       <div className="quote" dangerouslySetInnerHTML={markup} />

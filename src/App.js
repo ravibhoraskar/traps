@@ -11,14 +11,41 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [innerHTML, setInnerHTML] = useState("<div><h1>Hello World</h1></div>");
+  const [HTMLlogs, setHTMLlogs] = useState(["<div><h1>Hello World</h1></div>"]);
+  const [HTMLindex, setHTMLindex] = useState(0);
   const [prompt, updatePrompt] = useState("");
-  const submitPrompt = setInnerHTML.bind(this, prompt);
-
+  const submitPrompt = function () {
+    setHTMLlogs(HTMLlogs.slice(0, HTMLindex + 1).concat(prompt));
+    setHTMLindex(HTMLindex + 1);
+  };
+  const getCurrHTML = function () {
+    return HTMLlogs[HTMLindex];
+  };
+  const undoPrompt = function () {
+    if (HTMLindex > 0) {
+      setHTMLindex(HTMLindex - 1);
+    }
+  };
+  const redoPrompt = function () {
+    if (HTMLindex < HTMLlogs.length - 1) {
+      setHTMLindex(HTMLindex + 1);
+    }
+  };
   return (
     <div className="App">
       <QuoteContext.Provider
-        value={{ innerHTML, setInnerHTML, prompt, updatePrompt, submitPrompt }}
+        value={{
+          HTMLlogs,
+          setHTMLlogs,
+          HTMLindex,
+          setHTMLindex,
+          prompt,
+          updatePrompt,
+          submitPrompt,
+          getCurrHTML,
+          undoPrompt,
+          redoPrompt,
+        }}
       >
         <SplitPane className="split-pane-row">
           <SplitPaneLeft>
