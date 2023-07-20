@@ -71,8 +71,15 @@ export const Divider = (props) => {
 export const SplitPaneTop = (props) => {
   const topRef = createRef();
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const { prompt, updatePrompt, submitPrompt, undoPrompt, redoPrompt } =
-    useContext(QuoteContext);
+  const {
+    prompt,
+    updatePrompt,
+    submitPrompt,
+    canUndo,
+    undoPrompt,
+    canRedo,
+    redoPrompt,
+  } = useContext(QuoteContext);
 
   useEffect(() => {
     if (!clientHeight) {
@@ -100,8 +107,19 @@ export const SplitPaneTop = (props) => {
           <div>
             <input type="button" value="Update HTML" onClick={submitPrompt} />
             <br />
-            <input type="button" value="Undo" onClick={undoPrompt} /> {}
-            <input type="button" value="Redo" onClick={redoPrompt} />
+            <input
+              type="button"
+              value="Undo"
+              onClick={undoPrompt}
+              disabled={!canUndo}
+            />{" "}
+            {}
+            <input
+              type="button"
+              value="Redo"
+              onClick={redoPrompt}
+              disabled={!canRedo}
+            />
           </div>
         </form>
       </div>

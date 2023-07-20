@@ -21,15 +21,13 @@ function App() {
   const getCurrHTML = function () {
     return HTMLlogs[HTMLindex];
   };
+  const canUndo = HTMLindex > 0;
   const undoPrompt = function () {
-    if (HTMLindex > 0) {
-      setHTMLindex(HTMLindex - 1);
-    }
+    setHTMLindex(HTMLindex - 1);
   };
+  const canRedo = HTMLindex < HTMLlogs.length - 1;
   const redoPrompt = function () {
-    if (HTMLindex < HTMLlogs.length - 1) {
-      setHTMLindex(HTMLindex + 1);
-    }
+    setHTMLindex(HTMLindex + 1);
   };
   return (
     <div className="App">
@@ -43,7 +41,9 @@ function App() {
           updatePrompt,
           submitPrompt,
           getCurrHTML,
+          canUndo,
           undoPrompt,
+          canRedo,
           redoPrompt,
         }}
       >
