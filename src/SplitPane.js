@@ -116,7 +116,7 @@ export const SplitPaneBottom = (props) => {
     <div {...props} className="split-pane-bottom">
       <b> Current HTML: </b>
       <br />
-      {getCurrHTML()}
+      <code>{getCurrHTML()}</code>
       <br />
       <b>Current index:</b> {HTMLindex} <br />
       <b>Logs length:</b> {HTMLlogs.length}
