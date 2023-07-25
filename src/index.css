@@ -116,12 +116,3 @@ textarea {
   width: 500px;
   height: 100px;
 }
-
-code {
-  white-space: pre-wrap;
-  height: 150px;
-  width: 500px;
-  overflow-y: auto;
-  display: inline-block;
-  background-color: white;
-}

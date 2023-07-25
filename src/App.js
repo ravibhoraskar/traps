@@ -29,6 +29,9 @@ function App() {
   const redoPrompt = function () {
     setHTMLindex(HTMLindex + 1);
   };
+  const updateHTML = function (newHTML) {
+    setHTMLlogs(HTMLlogs.slice(0, HTMLindex).concat(newHTML));
+  };
   return (
     <div className="App">
       <QuoteContext.Provider
@@ -45,6 +48,7 @@ function App() {
           undoPrompt,
           canRedo,
           redoPrompt,
+          updateHTML,
         }}
       >
         <SplitPane className="split-pane-row">

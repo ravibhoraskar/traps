@@ -128,13 +128,19 @@ export const SplitPaneTop = (props) => {
 };
 
 export const SplitPaneBottom = (props) => {
-  const { HTMLlogs, HTMLindex, getCurrHTML } = useContext(QuoteContext);
+  const { HTMLlogs, HTMLindex, getCurrHTML, updateHTML } =
+    useContext(QuoteContext);
 
   return (
     <div {...props} className="split-pane-bottom">
       <b> Current HTML: </b>
       <br />
-      <code>{getCurrHTML()}</code>
+      <textarea
+        value={getCurrHTML()}
+        onChange={(event) => {
+          updateHTML(event.target.value);
+        }}
+      />
       <br />
       <b>Current index:</b> {HTMLindex} <br />
       <b>Logs length:</b> {HTMLlogs.length}
