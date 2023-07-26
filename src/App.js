@@ -14,9 +14,17 @@ function App() {
   const [HTMLlogs, setHTMLlogs] = useState(["<div><h1>Hello World</h1></div>"]);
   const [HTMLindex, setHTMLindex] = useState(0);
   const [prompt, updatePrompt] = useState("");
-  const submitPrompt = function () {
-    setHTMLlogs(HTMLlogs.slice(0, HTMLindex + 1).concat(prompt));
+  const [manualEdit, setManualEdit] = useState(false);
+  const updateLastHTML = function (newHTML) {
+    setHTMLlogs(HTMLlogs.slice(0, HTMLindex).concat(newHTML));
+  }
+  const appendNewHTML = function (newHTML) {
+    setHTMLlogs(HTMLlogs.slice(0, HTMLindex + 1).concat(newHTML));
     setHTMLindex(HTMLindex + 1);
+  }
+  const submitPrompt = function () {
+    appendNewHTML(prompt);
+    setManualEdit(false);
   };
   const getCurrHTML = function () {
     return HTMLlogs[HTMLindex];
@@ -29,8 +37,14 @@ function App() {
   const redoPrompt = function () {
     setHTMLindex(HTMLindex + 1);
   };
-  const updateHTML = function (newHTML) {
-    setHTMLlogs(HTMLlogs.slice(0, HTMLindex).concat(newHTML));
+  const manualUpdateHTML = function (newHTML) {
+    if(manualEdit) {
+      updateLastHTML(newHTML);
+    }
+    else {
+      appendNewHTML(newHTML);
+      setManualEdit(true);
+    }
   };
   return (
     <div className="App">
@@ -48,7 +62,7 @@ function App() {
           undoPrompt,
           canRedo,
           redoPrompt,
-          updateHTML,
+          manualUpdateHTML,
         }}
       >
         <SplitPane className="split-pane-row">
