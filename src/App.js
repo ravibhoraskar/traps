@@ -32,10 +32,12 @@ function App() {
   const canUndo = HTMLindex > 0;
   const undoPrompt = function () {
     setHTMLindex(HTMLindex - 1);
+    setManualEdit(false);
   };
   const canRedo = HTMLindex < HTMLlogs.length - 1;
   const redoPrompt = function () {
     setHTMLindex(HTMLindex + 1);
+    setManualEdit(false);
   };
   const manualUpdateHTML = function (newHTML) {
     if(manualEdit) {
