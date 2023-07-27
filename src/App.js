@@ -11,7 +11,6 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-
   const [HTMLlogs, setHTMLlogs] = useState(["<div><h1>Hello World</h1></div>"]);
   const [HTMLindex, setHTMLindex] = useState(0);
   const [prompt, updatePrompt] = useState("");
@@ -21,11 +20,11 @@ function App() {
   const currHTML = HTMLlogs[HTMLindex];
   const updateLastHTML = function (newHTML) {
     setHTMLlogs(HTMLlogs.slice(0, HTMLindex).concat(newHTML));
-  }
+  };
   const appendNewHTML = function (newHTML) {
     setHTMLlogs(HTMLlogs.slice(0, HTMLindex + 1).concat(newHTML));
     setHTMLindex(HTMLindex + 1);
-  }
+  };
 
   // Function to update HTML either manually or via prompt.
   const manualUpdateHTML = function (newHTML) {

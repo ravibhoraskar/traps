@@ -89,7 +89,7 @@ export const SplitPaneTop = (props) => {
 
     topRef.current.style.minHeight = clientHeight + "px";
     topRef.current.style.maxHeight = clientHeight + "px";
-  }, [clientHeight]);
+  }, [clientHeight, setClientHeight, topRef]);
 
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
@@ -160,7 +160,7 @@ export const SplitPaneLeft = (props) => {
 
     topRef.current.style.minWidth = clientWidth + "px";
     topRef.current.style.maxWidth = clientWidth + "px";
-  }, [clientWidth]);
+  }, [clientWidth, setClientWidth, topRef]);
 
   return <div {...props} className="split-pane-left" ref={topRef} />;
 };
