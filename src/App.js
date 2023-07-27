@@ -6,7 +6,8 @@ import SplitPane, {
   SplitPaneTop,
 } from "./SplitPane";
 import QuoteContext from "./QuoteContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Bard from "bard-ai";
 
 import "./App.css";
 
@@ -15,6 +16,18 @@ function App() {
   const [HTMLindex, setHTMLindex] = useState(0);
   const [prompt, updatePrompt] = useState("");
   const [manualEdit, setManualEdit] = useState(false);
+  const [bardCookie, setBardCookie] = useState(["1234"]);
+
+  useEffect(() => {
+    async function initBard() {
+      try {
+        await Bard.init(bardCookie);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    initBard();
+  });
 
   // Variable for current HTML, and functions to update and append HTML logs
   const currHTML = HTMLlogs[HTMLindex];
@@ -67,6 +80,8 @@ function App() {
           undoPrompt,
           canRedo,
           redoPrompt,
+          bardCookie,
+          setBardCookie,
         }}
       >
         <SplitPane className="split-pane-row">

@@ -79,6 +79,8 @@ export const SplitPaneTop = (props) => {
     undoPrompt,
     canRedo,
     redoPrompt,
+    bardCookie,
+    setBardCookie,
   } = useContext(QuoteContext);
 
   useEffect(() => {
@@ -121,6 +123,14 @@ export const SplitPaneTop = (props) => {
               disabled={!canRedo}
             />
           </div>
+          Bard Cookie:{" "}
+          <input
+            type="text"
+            value={bardCookie}
+            onChange={(event) => {
+              setBardCookie(event.target.value);
+            }}
+          />
         </form>
       </div>
     </div>
