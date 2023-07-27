@@ -11,10 +11,14 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+
   const [HTMLlogs, setHTMLlogs] = useState(["<div><h1>Hello World</h1></div>"]);
   const [HTMLindex, setHTMLindex] = useState(0);
   const [prompt, updatePrompt] = useState("");
   const [manualEdit, setManualEdit] = useState(false);
+
+  // Variable for current HTML, and functions to update and append HTML logs
+  const currHTML = HTMLlogs[HTMLindex];
   const updateLastHTML = function (newHTML) {
     setHTMLlogs(HTMLlogs.slice(0, HTMLindex).concat(newHTML));
   }
@@ -22,13 +26,22 @@ function App() {
     setHTMLlogs(HTMLlogs.slice(0, HTMLindex + 1).concat(newHTML));
     setHTMLindex(HTMLindex + 1);
   }
+
+  // Function to update HTML either manually or via prompt.
+  const manualUpdateHTML = function (newHTML) {
+    if (manualEdit) {
+      updateLastHTML(newHTML);
+    } else {
+      appendNewHTML(newHTML);
+      setManualEdit(true);
+    }
+  };
   const submitPrompt = function () {
     appendNewHTML(prompt);
     setManualEdit(false);
   };
-  const getCurrHTML = function () {
-    return HTMLlogs[HTMLindex];
-  };
+
+  // Methods to undo and redo.
   const canUndo = HTMLindex > 0;
   const undoPrompt = function () {
     setHTMLindex(HTMLindex - 1);
@@ -39,32 +52,22 @@ function App() {
     setHTMLindex(HTMLindex + 1);
     setManualEdit(false);
   };
-  const manualUpdateHTML = function (newHTML) {
-    if(manualEdit) {
-      updateLastHTML(newHTML);
-    }
-    else {
-      appendNewHTML(newHTML);
-      setManualEdit(true);
-    }
-  };
+
   return (
     <div className="App">
       <QuoteContext.Provider
         value={{
           HTMLlogs,
-          setHTMLlogs,
           HTMLindex,
-          setHTMLindex,
           prompt,
           updatePrompt,
+          currHTML,
+          manualUpdateHTML,
           submitPrompt,
-          getCurrHTML,
           canUndo,
           undoPrompt,
           canRedo,
           redoPrompt,
-          manualUpdateHTML,
         }}
       >
         <SplitPane className="split-pane-row">

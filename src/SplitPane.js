@@ -128,7 +128,7 @@ export const SplitPaneTop = (props) => {
 };
 
 export const SplitPaneBottom = (props) => {
-  const { HTMLlogs, HTMLindex, getCurrHTML, manualUpdateHTML } =
+  const { HTMLlogs, HTMLindex, currHTML, manualUpdateHTML } =
     useContext(QuoteContext);
 
   return (
@@ -136,7 +136,7 @@ export const SplitPaneBottom = (props) => {
       <b> Current HTML: </b>
       <br />
       <textarea
-        value={getCurrHTML()}
+        value={currHTML}
         onChange={(event) => {
           manualUpdateHTML(event.target.value);
         }}
@@ -166,8 +166,8 @@ export const SplitPaneLeft = (props) => {
 };
 
 export const SplitPaneRight = (props) => {
-  const { getCurrHTML } = useContext(QuoteContext);
-  const markup = { __html: getCurrHTML() };
+  const { currHTML } = useContext(QuoteContext);
+  const markup = { __html: currHTML };
   return (
     <div {...props} className="split-pane-right">
       <div className="quote" dangerouslySetInnerHTML={markup} />
