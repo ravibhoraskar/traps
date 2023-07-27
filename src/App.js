@@ -49,6 +49,19 @@ function App() {
     }
   };
   const submitPrompt = function () {
+    // Potential prompt for updating HTML
+    /*
+    var full_prompt = (
+      "A user's HTML source code is:\n```\n"
+      + currHTML + "\n```\n"
+      + "The user wants to modify the code as follows: "
+      + prompt + "\n\n"
+      + "Please provide the modified code.\n"
+      + "Do not provide any text other than the modified code."
+    );
+    var bard_output = Bard.askAI(full_prompt);
+    appendNewHTML(bard_output);
+    */
     appendNewHTML(prompt);
     setManualEdit(false);
   };
