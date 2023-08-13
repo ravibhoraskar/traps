@@ -8,8 +8,9 @@ import SplitPane, {
 import QuoteContext from "./QuoteContext";
 import { useState, useEffect } from "react";
 import Bard from "bard-ai";
-
+import OpenAI from "./openai/OpenAI";
 import "./App.css";
+// import dotenv from 'dotenv';
 
 function App() {
   const [HTMLlogs, setHTMLlogs] = useState(["<div><h1>Hello World</h1></div>"]);
@@ -48,21 +49,38 @@ function App() {
       setManualEdit(true);
     }
   };
-  const submitPrompt = function () {
+  const submitPrompt = async function () {
     // Potential prompt for updating HTML
-    /*
+    console.log("blah blah blah")
     var full_prompt = (
-      "A user's HTML source code is:\n```\n"
-      + currHTML + "\n```\n"
-      + "The user wants to modify the code as follows: "
-      + prompt + "\n\n"
-      + "Please provide the modified code.\n"
-      + "Do not provide any text other than the modified code."
+      "Following is the HTML code of a webpage: ***HTML CODE BEGINS***"
+      + currHTML + "***HTML CODE ENDS***"
+      + "The user wants to modify the code as follows: ***USER INSTRUCTION BEGINS***"
+      + prompt + "***USER INSTRUCTION ENDS***"
+      + "Modify and return the given HTML code as per user's instructions.\n"
+      + "The HTML code should be preceded by the phrase '***HTML CODE BEGINS***\n' and followed by the phrase '***HTML CODE ENDS***\n'."
     );
+
+
+    const open_ai_obj = new OpenAI("Put your open AI key here"); //TODO: Put api key in env.
+    // const open_ai_output = open_ai_obj.generateText(full_prompt, 'text-davinci-003', 3000, 0.85);
+
+    const open_ai_output  = await open_ai_obj.generateText(full_prompt, 'text-davinci-003', 3000, 0.85);
+    console.log(open_ai_output)
+    //
+    // // Find the index of the start and end markers
+    const startIndex = open_ai_output.indexOf("***HTML CODE BEGINS***") + "***HTML CODE BEGINS***".length;
+    const endIndex = open_ai_output.indexOf("***HTML CODE ENDS***");
+    //
+    // // Extract the substring between the start and end markers
+    const html_output_openai = open_ai_output.substring(startIndex, endIndex);
+    appendNewHTML(html_output_openai);
+    // appendNewHTML(open_ai_output)
+    /*
     var bard_output = Bard.askAI(full_prompt);
     appendNewHTML(bard_output);
-    */
-    appendNewHTML(prompt);
+     */
+    // appendNewHTML(prompt);
     setManualEdit(false);
   };
 
